@@ -6,6 +6,7 @@ type IProps = {
   title: string;
   param: string;
 };
+
 export default function NavbarItem({ title, param }: IProps) {
   const searchParams = useSearchParams();
   const genre = searchParams.get("genre");
