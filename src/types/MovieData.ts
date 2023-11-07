@@ -1,8 +1,9 @@
-export type IResults = {
+export type IResult = {
   adult: boolean;
   backdrop_path: string;
   id: number;
   title: string;
+  name: string;
   original_language: string;
   original_title: string;
   overview: string;
@@ -14,10 +15,11 @@ export type IResults = {
   video: boolean;
   vote_average: number;
   vote_count: number;
+  first_air_date: string;
 };
 
 export type IData = {
-  results: IResults[];
+  results: IResult[];
   page: number;
   total_pages: number;
   total_results: number;
