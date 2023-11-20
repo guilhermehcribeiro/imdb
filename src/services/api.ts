@@ -7,7 +7,6 @@ const Api = () => {
     headers: {
       "Content-Type": "application/json",
       "Access-Control-Allow-Origin": "*",
-      api_key: API_KEY || "",
     },
   };
 
@@ -24,13 +23,13 @@ const Api = () => {
     return res;
   };
 
-  const get = (url: string, options: RequestInit = {}) => {
+  const get = (url: string, query: string | null, options: RequestInit = {}) => {
     const requestOptions = {
       ...defaultOptions,
       ...options,
       method: "GET",
     };
-    return fetchWithErrorHandling(`${BASE_URL}${url}`, requestOptions);
+    return fetchWithErrorHandling(`${BASE_URL}${url}?api_key=${API_KEY}${query ? query : ''}&language=en-US`, requestOptions);
   };
 
   return {

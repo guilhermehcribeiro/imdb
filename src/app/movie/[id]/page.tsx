@@ -1,19 +1,5 @@
-import { IMovie } from "@/types/MovieData";
 import Image from "next/image";
-import React from "react";
-
-const API_KEY = process.env.API_KEY;
-
-const getMovie = async (movieId: string) => {
-  const res = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}`,
-    {
-      next: { revalidate: 10000 },
-    }
-  );
-
-  return await res.json();
-};
+import { MovieRepository } from "@/repositories/MovieRepository";
 
 export default async function MoviePage({
   params,
@@ -23,7 +9,7 @@ export default async function MoviePage({
   };
 }) {
   const movieId = params?.id;
-  const movie: IMovie = await getMovie(movieId);
+  const movie = await MovieRepository.getMovie(movieId);
 
   return (
     <div className="w-full">

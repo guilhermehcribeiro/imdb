@@ -1,6 +1,5 @@
 import Results from "@/components/Results";
-
-const API_KEY = process.env.API_KEY;
+import { MovieRepository } from "@/repositories/MovieRepository";
 
 export default async function SearchPage({
   params,
@@ -11,16 +10,7 @@ export default async function SearchPage({
 }) {
   const searchTerm = params?.searchTerm;
 
-  const res = await fetch(
-    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchTerm}&language=en-US&include_adult=false`,
-    {
-      next: { revalidate: 10000 },
-    }
-  );
-
-  if (!res?.ok) throw new Error("Error fetching data");
-
-  const data = await res?.json();
+  const data = await MovieRepository.searchMovie(searchTerm)
   const results = data?.results;
 
   return (
